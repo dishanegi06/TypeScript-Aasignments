@@ -1,38 +1,44 @@
-function *ArmstrongNumber()
-{
-    yield("Hey let's start");
-for(let i=0;i<=5000;i++)
-        { 
-            let digits=i.toString().length;
-         
-            let sum=0;
-            let n=i;
-            while(n>0)
+class getNextArmstrong{
+    no;
+    *[Symbol.iterator](){
+        try {
+            let num= this.no;
+            num=0;
+            while(num<300)
             {
-                let rem= n % 10;
-                sum +=rem ** digits;
-                n = parseInt(n/10);
+                let noofdigits=num.toString().length;
+                let temp= num;
+                let sum=0,remainder;
+                while(temp>0){
+                    remainder = temp % 10;
+                    sum += remainder ** noofdigits;
+                    temp = Math.floor(temp/10);
+                }
+                if(sum == num){yield num;}
+                num++;
             }
-            if(i>1000)
-            {
-             yield("Hey you were exceeding your limit");
-            }
-          
-            if (sum==i)
-            {
-               console.log(i);
-            }
-        }
-      
-    };
-    
+            throw " Sorry limit exceeded";    
+        } catch (error) {
+            yield error
+        }       
+    }
+    reset()
+    {
+        this.no=0;
+    }
+}
 
-   
+let arm = new getNextArmstrong()[Symbol.iterator]();
 
-
-
-const myNumber=ArmstrongNumber();
-console.log(myNumber.next());
-console.log(myNumber.next());
-
-
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());

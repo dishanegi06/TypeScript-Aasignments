@@ -25,43 +25,62 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-function ArmstrongNumber() {
-    var i, digits, sum, n, rem;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, ("Hey let's start")];
-            case 1:
-                _a.sent();
-                i = 0;
-                _a.label = 2;
-            case 2:
-                if (!(i <= 5000)) return [3 /*break*/, 6];
-                digits = i.toString().length;
-                sum = 0;
-                n = i;
-                while (n > 0) {
-                    rem = n % 10;
-                    sum += Math.pow(rem, digits);
-                    n = parseInt(n / 10);
-                }
-                if (!(i > 1000)) return [3 /*break*/, 4];
-                return [4 /*yield*/, ("Hey you were exceeding your limit")];
-            case 3:
-                _a.sent();
-                _a.label = 4;
-            case 4:
-                if (sum == i) {
-                    console.log(i);
-                }
-                _a.label = 5;
-            case 5:
-                i++;
-                return [3 /*break*/, 2];
-            case 6: return [2 /*return*/];
-        }
-    });
-}
-;
-var myNumber = ArmstrongNumber();
-console.log(myNumber.next());
-console.log(myNumber.next());
+var getNextArmstrong = /** @class */ (function () {
+    function getNextArmstrong() {
+    }
+    getNextArmstrong.prototype[Symbol.iterator] = function () {
+        var num, noofdigits, temp, sum, remainder, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 5, , 7]);
+                    num = this.no;
+                    num = 0;
+                    _a.label = 1;
+                case 1:
+                    if (!(num < 300)) return [3 /*break*/, 4];
+                    noofdigits = num.toString().length;
+                    temp = num;
+                    sum = 0, remainder = void 0;
+                    while (temp > 0) {
+                        remainder = temp % 10;
+                        sum += Math.pow(remainder, noofdigits);
+                        temp = Math.floor(temp / 10);
+                    }
+                    if (!(sum == num)) return [3 /*break*/, 3];
+                    return [4 /*yield*/, num];
+                case 2:
+                    _a.sent();
+                    _a.label = 3;
+                case 3:
+                    num++;
+                    return [3 /*break*/, 1];
+                case 4: throw " Sorry limit exceeded";
+                case 5:
+                    error_1 = _a.sent();
+                    return [4 /*yield*/, error_1];
+                case 6:
+                    _a.sent();
+                    return [3 /*break*/, 7];
+                case 7: return [2 /*return*/];
+            }
+        });
+    };
+    getNextArmstrong.prototype.reset = function () {
+        this.no = 0;
+    };
+    return getNextArmstrong;
+}());
+var arm = new getNextArmstrong()[Symbol.iterator]();
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());

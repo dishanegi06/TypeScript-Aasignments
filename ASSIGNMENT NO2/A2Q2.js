@@ -1,43 +1,42 @@
-var count = 0;
-function ArmstrongNumber() {
-    return {
-        next: function () {
-            count++;
-            return count < 2000 ?
-                { value: getArmstrongNumber(count++), done: false } :
-                { value: undefined, done: true };
-        }
+var getNextArmstrong = /** @class */ (function () {
+    function getNextArmstrong() {
+    }
+    getNextArmstrong.prototype[Symbol.iterator] = function () {
+        var no = 0;
+        return {
+            next: function () {
+                var temp = returnArmstrong(++no);
+                no = temp;
+                return { value: temp };
+            }
+        };
     };
-}
-function getArmstrongNumber(num) {
-    for (var i = num; i <= 2000; i++) {
-        var power = i.toString().length;
-        var sum = 0;
-        var n = i;
-        while (n > 0) {
-            var rem = n % 10;
-            sum += Math.pow(rem, power);
-            n = parseInt(n / 10);
-        }
-        if (sum === i) {
-            count = sum;
-            return i;
-        }
+    return getNextArmstrong;
+}());
+function returnArmstrong(num) {
+    var noofdigits = num.toString().length;
+    var temp = num, sum = 0, remainder;
+    while (temp > 0) {
+        remainder = temp % 10;
+        sum += Math.pow(remainder, noofdigits);
+        temp = Math.floor(temp / 10);
+    }
+    if (sum == num) {
+        return num;
+    }
+    else {
+        num = num + 1;
+        return returnArmstrong(num);
     }
 }
-var myNumber = ArmstrongNumber();
-console.log(myNumber.next());
-console.log(myNumber.next());
-console.log(myNumber.next());
-console.log(myNumber.next());
-console.log(myNumber.next());
-console.log(myNumber.next());
-console.log(myNumber.next());
-console.log(myNumber.next());
-console.log(myNumber.next());
-console.log(myNumber.next());
-console.log(myNumber.next());
-console.log(myNumber.next());
-console.log(myNumber.next());
-console.log(myNumber.next());
-console.log(myNumber.next());
+var arm = new getNextArmstrong()[Symbol.iterator]();
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next());
+console.log(arm.next()); // for more numbers call next() again
